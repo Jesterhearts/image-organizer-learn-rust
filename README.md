@@ -31,14 +31,26 @@ cargo add ratatui
 - [ ] Create a basic Rust TUI using the `ratatui` library that displays an outlined block with the
   text "Hello, World!".
 - [ ] Add the ability to specify a directory in the arguments to the application and display the
-  directory in the TUI. <details> <summary>Hint</summary> The `clap` crate is a great way to make
-  handling command line arguments easier. Alternatively, you can use `std::env::args` to get the
-  arguments passed to the program. </details>
-- [ ] Read the directory and display a list of files in the ui. <details> <summary>Hint</summary>
-  You can use the `std::fs` module to read the directory and get a list of files. </details>
-  <details> <summary> Hint 2 </summary> The `DirEntry` struct has functionality to determine if a
-  particular entry is a file or a directory. </details>
+  directory in the TUI.
+  
+  <details> <summary>Hint</summary>
+  
+  The `clap` crate is a great way to make handling command line arguments easier. Alternatively, you
+  can use `std::env::args` to get the arguments passed to the program. </details>
+- [ ] Read the directory and display a list of files in the ui.
+
+    <details> <summary>Hint</summary>
+
+    You can use the `std::fs` module to read the directory and get a list of files. </details>
+
+  <details> <summary> Hint 2 </summary>
+  
+  The `DirEntry` struct has functionality to determine if a particular entry is a file or a
+  directory. </details>
   
 #### Stretch Goal
-- [ ] Add the ability to move up and down the list of files using the arrow keys. <details>
-  <summary>Hint</summary> You can use the `crossterm` crate to handle keyboard input. </details>
+- [ ] Add the ability to move up and down the list of files using the arrow keys.
+
+    <details> <summary>Hint</summary>
+    
+  You can use the `crossterm` crate to handle keyboard input. </details>
