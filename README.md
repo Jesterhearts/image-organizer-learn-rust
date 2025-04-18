@@ -43,14 +43,48 @@ cargo add ratatui
 
     You can use the `std::fs` module to read the directory and get a list of files. </details>
 
-  <details> <summary> Hint 2 </summary>
+    <details> <summary> Hint 2 </summary>
   
-  The `DirEntry` struct has functionality to determine if a particular entry is a file or a
-  directory. </details>
+    The `DirEntry` struct has functionality to determine if a particular entry is a file or a
+    directory. </details>
   
 #### Stretch Goal
 - [ ] Add the ability to move up and down the list of files using the arrow keys.
 
     <details> <summary>Hint</summary>
     
-  You can use the `crossterm` crate to handle keyboard input. </details>
+    You can use the `crossterm` crate to handle keyboard input. </details>
+
+    <details> <summary>Hint 2</summary>
+
+    You can use the `Style` struct and `set_style` method to change the color of the selected line. </details>
+
+### Week 2
+- [ ] Implement the stretch goal from Week 1.
+- [ ] Add the ability to open a selected file using the `enter` key and display the image in the UI.
+  The `escape` key should exit the image viewer and return to the file list. There is a crate called
+  `ratatui-image` that can be used to display images in the TUI. You may need to manually specify
+  `Sixel` as the format for the image on Windows.
+- [ ] Make sure the image is captioned with the file name and path. The caption should be displayed
+  at the bottom of the image.
+
+  <details> <summary>Hint</summary>
+
+  You may need to use the `Layout` struct to create a layout for the image and caption. </details>
+
+#### Stretch Goal
+- [ ] Add a text input field (you can use e.g. `ratatui_textarea`) which allows a directory to be
+  specified and make displayed list of files update to reflect the new directory. The text input
+  field should be displayed at the top of the TUI.
+
+### Week 3
+- [ ] Implement the stretch goal from Week 2.
+- [ ] Update the handling of the text input field to allow filenames to be entered. If the filename
+  is listed in the UI, it should be highlighed as selected and the `enter` key should open the
+  image. It should still be possible to enter a directory and have the list of files update
+  accordingly.
+
+#### Stretch Goal
+- [ ] Get `tantivy` up and running. Add a command line argument for the search query, and have
+  `tantivy` do the matching against filenames for you. You do not need to support search in the TUI
+  itself.
