@@ -20,11 +20,19 @@ them if you are stuck.
 - [VSCode](https://code.visualstudio.com/)
 - [Rust Analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
 
+## Tips
+
 You can use cargo to add dependencies to your project. For example, to add the `ratatui` crate, run the following
 command in the terminal:
 ```sh
 cargo add ratatui
 ```
+
+Many libraries can be found by searching [crates.io](https://crates.io/) or
+[lib.rs](https://lib.rs/). The libraries recommended in this project also tend to have good
+documentation available on [docs.rs](https://docs.rs/). You can also find the github repos for the
+libraries linked on the crates.io page. Each library will have an `examples` folder with example
+code you can play with to get a feel for how the library works.
 
 ## Projects
 ### Week 1
@@ -75,7 +83,8 @@ cargo add ratatui
 #### Stretch Goal
 - [ ] Add a text input field (you can use e.g. `ratatui_textarea`) which allows a directory to be
   specified and make displayed list of files update to reflect the new directory. The text input
-  field should be displayed at the top of the TUI.
+  field should be displayed at the top of the TUI. Pressing `enter` should commit the text in the
+  input field and update the UI.
 
 ### Week 3
 - [ ] Implement the stretch goal from Week 2.
@@ -88,3 +97,57 @@ cargo add ratatui
 - [ ] Get `tantivy` up and running. Add a command line argument for the search query, and have
   `tantivy` do the matching against filenames for you. You do not need to support search in the TUI
   itself.
+
+
+### Week 4
+- [ ] Implement the stretch goal from Week 3.
+- [ ] Change the UI so that text entry uses `tantivy` for searching to match against filenames. The
+  UI should still handle directory matching and loading.
+- [ ] Change the input handling to be debounced so that after a delay in typing, the search is
+  automatically updated.
+
+#### Stretch Goal
+- [ ] Make the search and directory loading run in a background thread and send changes to the main
+  thread when processing finishes so the UI isn't blocked. You should have some sort of loading
+  indicator to animate while work is happening in the background.
+
+  <details> <summary>Hint</summary>
+  You can use `std::sync::mpmc` to send messages between threads. </details>
+
+### Week 5
+- [ ] Implement the stretch goal from Week 4.
+- [ ] Add the ability to tag images. The tags can be stored in memory for now, but should update
+  `tantivy` so that images are searchable by tag.
+- [ ] Add the ability to view tags to the UI. A select number of tags should be displayed in the
+  search results, with a longer list of tags visible when the image is selected. The tags should be
+  displayed in a different color to the filename.
+
+#### Stretch Goal
+- [ ] Persist the tags to a database. You can use `redb` to handle this persistence.
+
+### Week 6
+- [ ] Implement the stretch goal from Week 5.
+- [ ] Add the ability to remove tags from images. This should update the database and `tantivy`
+  index. You should be able to hit the tab key on the image viewing screen to cycle between tags and
+  remove them with `delete`.
+
+#### Stretch Goal
+- [ ] Add the ability to hash and persist file hashes to the database. I'd recommend using `blake3`
+  for file hashing.
+
+### Week 7
+- [ ] Implement the stretch goal from Week 6.
+- [ ] Use the hashes you generate for files to lookup info in the database. This should apply to
+  every file loaded so that you can still retrieve metadata for moved files. Make sure to update the
+  hash information for edited files if the file at a known path location has changed.
+
+#### Stretch Goal
+- [ ] Add the ability to view metadata for images. This should be displayed in a separate screen that
+  can be accessed by pressing `m` while viewing an image. The metadata should be displayed in a
+  scrollable list.
+
+### Week 8
+- [ ] Implement the stretch goal from Week 7.
+- [ ] Add mouse handling to the TUI. You should be able to click on images to open them, and click
+  on tags to remove them. You should also be able to click on the text input field to focus it. The
+  scroll wheel should also scroll the list of images and tags.
