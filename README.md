@@ -38,6 +38,39 @@ code you can play with to get a feel for how the library works.
 ### Week 1
 - [ ] Create a basic Rust TUI using the `ratatui` library that displays an outlined block with the
   text "Hello, World!".
+
+  <details> <summary>Hint</summary>
+  
+  A lot of tutorials will push for using an `App` struct to handle the state of the TUI. This can be
+  useful for more complex applications, but for this project it is far simpler to just do everything
+  in a main loop. For example:
+
+  ```rust
+  fn main() {
+      let terminal = <create terminal here>;
+
+      loop {
+          terminal.draw(|f| {
+              f.render_widget(<paragraph widget with border>, f.area());
+          }).unwrap();
+
+          if crossterm::event::poll(Duration::from_millis(100)).unwrap() {
+              match event::read().unwrap() {
+                  Event::Key(KeyEvent {
+                      code: KeyCode::Char('q'), ..
+                  }) => {
+                      break; 
+                  }
+                  _ => {}
+              }
+          }
+      }
+
+      Ok(())
+  }
+  ```
+  </details>
+  
 - [ ] Add the ability to specify a directory in the arguments to the application and display the
   directory in the TUI.
   
@@ -45,6 +78,14 @@ code you can play with to get a feel for how the library works.
   
   The `clap` crate is a great way to make handling command line arguments easier. Alternatively, you
   can use `std::env::args` to get the arguments passed to the program. </details>
+
+  <details> <summary>Hint 2</summary>
+  
+  You can think of `clap` as just another library. The `#[derive(Parser)]` procedural macro is just
+  like a function call to a normal library that happens to generate code at compile time rather than
+  executing code at runtime. The fields of your struct are like arguments to this function, and the
+  `#[clap(...)]` attributes are like options you can pass to the function. </details>
+
 - [ ] Read the directory and display a list of files in the ui.
 
     <details> <summary>Hint</summary>
@@ -55,6 +96,12 @@ code you can play with to get a feel for how the library works.
   
     The `DirEntry` struct has functionality to determine if a particular entry is a file or a
     directory. </details>
+
+    <details> <summary>Hint 3</summary> 
+
+    You can either use a `List` widget to display the list of files, or you can use the `Layout`
+    builder to specify the layout of the list, and specify a `Paragraph` widget for each file.
+    </details>
   
 #### Stretch Goal
 - [ ] Add the ability to move up and down the list of files using the arrow keys.
